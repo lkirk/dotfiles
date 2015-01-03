@@ -3,9 +3,9 @@
 This repo contains a unified set of dotfiles
   it will eventually contain a conditionally defined set of dotfiles
 
-* Dotfiles contained
-  .Xresources
-  .tmux.conf
+* Dotfiles contained: \n
+  .Xresources         \n
+  .tmux.conf          \n
   .emacs
   .emacs.elc
   .emacs.d/
