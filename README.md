@@ -3,15 +3,17 @@
 This repo contains a unified set of dotfiles
   it will eventually contain a conditionally defined set of dotfiles
 
-* Dotfiles contained: \n
-  .Xresources         \n
-  .tmux.conf          \n
-  .emacs
-  .emacs.elc
-  .emacs.d/
-  .xmobarrc
-  .xmonad/
-  .zshrc
+* Dotfiles contained:
+  
+  - .Xresources
+  - .tmux.conf
+  - .emacs
+  - .emacs.elc
+  - .emacs.d/
+  - .xmobarrc
+  - .xmonad/
+  - .zshrc
+
 
 * TODO Make Contidional [0/2]
   - [ ] read operating system
