@@ -3,6 +3,14 @@
 This repo contains a unified set of dotfiles
   it will eventually contain a conditionally defined set of dotfiles
 
+* Dexpendencies:
+
+  - xmonad-contrib
+  - xmonad
+  - xmobar
+  - emacs
+  - tmux
+
 * Dotfiles contained:
   
   - .Xresources
@@ -15,9 +23,13 @@ This repo contains a unified set of dotfiles
   - .zshrc
 
 
-* TODO Make Contidional [0/2]
+* TODO Make Contidional [0/5]
   - [ ] read operating system
   - [ ] shell script to modify file options
+  - [ ] in particular, .zshrc needs to be conditionally copied
+        into home dir
+  - [ ] conditional copying script (shell)
+  - [ ] or ve?
 
 * TODO Theme selection [0/3]
   - [ ] find good themes (with modifications)
