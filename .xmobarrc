@@ -1,11 +1,11 @@
 Config { 
 
    -- appearance
-     font =         "terminus:size=12:regular:antialias=false"
+     font =         "-*-terminus-medium-r-normal--12-*-*-*-*-*-*-*"
    , bgColor =      "#202020"
    , fgColor =      "#A2A2A2"
    , position =     Top
-   , border =       BottomB
+   , --border =       BottomB
    , borderColor =  "#646464"
 
    -- layout
@@ -82,7 +82,7 @@ Config {
 
                              , "--" -- battery specific options
                                        -- discharging status
-                                       , "-o"	, "<left>% (<timeleft>)"
+                                       , "-o"	, "(<timeleft>)"
                                        -- AC "on" status
                                        , "-O"	, "<fc=#dAA520>Charging</fc>"
                                        -- charged status
