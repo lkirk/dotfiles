@@ -25,6 +25,7 @@ This repo contains a unified set of dotfiles
 
 * TODO Make Contidional [0/5]
   - [ ] read operating system
+  - [ ] read hostname as an alternative
   - [ ] shell script to modify file options
   - [ ] in particular, .zshrc needs to be conditionally copied
         into home dir
