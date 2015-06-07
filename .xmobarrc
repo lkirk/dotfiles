@@ -34,6 +34,7 @@ Config {
    --   The --template option controls how the plugin is displayed. Text
    --   color can be set by enclosing in <fc></fc> tags. For more details
    --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
+
    , commands = 
         -- network activity monitor (dynamic interface resolution)
         [ Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
