@@ -2,10 +2,10 @@
 ; EMACS INIT FILE ;
 ;;---------------;;
 
-
-;;------------------------;;
-; SERVER SHUTDOWN FUNCTION ;
-;;------------------------;;
+;; setup melpa
+(require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; define function to shutdown emacs server instance
 (defun ss()
@@ -15,79 +15,32 @@
   (kill-emacs)
   )
 
-;;---------;;
-; EVIL MODE ;
-;;---------;;
+;; set up some defaults
+(ido-mode t)
+(setq inhibit-splash-screen t) 
+(setq make-backup-files nil)   ;; no ~ files
+(load-theme 'cyberpunk t)
+;;(require 'ess-site)
 (require 'evil)
 (evil-mode 1)
 
-;;------------------------;;
-; MELPA PACKAGE MANAGEMENT ;
-;;------------------------;;
+;; keyboard settings
+(defun select-next-window ()
+  "Switch to the next window with M-`"
+  (interactive)
+  (select-window (next-window)))
 
-(require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(global-set-key (kbd "M-`") 'select-next-window)
+(global-set-key (kbd "C-x C-a") 'set-visited-file-name) ;;"save as" functionality
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/elpa/cyberpunk-theme-20140319.1853/cyberpunk-theme.el")
-
-(load-theme 'cyberpunk t)
-
-;;-----;;
-;  ESS  ;
-;;-----;;
-
-;;(require 'ess-site)
-
-;;--------;;
-; ORG MODE ;
-;;--------;;
-
+;; org defaults
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 
-;;---------;;
-; I DO MODE ;
-;;---------;;
 
-(ido-mode t)
-
-;;-----------------;;
-;  TURN OFF SPLASH  ;
-;;-----------------;;
-
-(setq inhibit-splash-screen t)
-
-;;---------------------------;;
-;  TURN OFF BACKUP (~) FILES  ;
-;;---------------------------;;
-
-(setq make-backup-files nil)
-
-;;---------------------;;
-;; SAVE AS KEY COMMAND ;;
-;;---------------------;;
-
-(global-set-key (kbd "C-x C-a") 'set-visited-file-name)
-
-;;-------------------------------;;
-;; SWITCHING WINDOWS KEY COMMAND ;;
-;;-------------------------------;;
-
-(defun select-next-window ()
-  "Switch to the next window"
-  (interactive)
-  (select-window (next-window)))
-
-(global-set-key (kbd "M-`") 'select-next-window)
-
-;;-----------;;
-;; MODE-LINE ;;
-;;-----------;;
-
-;; Get rid of the old mode-line and replace with a more informative and organized mode-line
+;; custom modeline
 (setq-default mode-line-format
    (list
       " -- "
