@@ -1,17 +1,17 @@
-#+TITLE: README.md
+#+TITLE: my
 
 This repo contains a unified set of dotfiles it will install 
 itself with a simple set of symlinks. To perform this action:
-#+begin_src
+#+begin_src sh
 make install
 #+end_src
 
 * Dotfiles contained:
-  zsh/.zshrc
-  xmonad/xmonad.hs
-  xmonad/.xmobarrc
-  x11/.xinitrc
-  x11/pointer/thinkpad-x61/20-trackpoint.conf
-  x11/keyboard/10-keyboard.conf
-  x11/.Xresources
-  emacs/.emacs
+  - zsh/.zshrc
+  - xmonad/xmonad.hs
+  - xmonad/.xmobarrc
+  - x11/.xinitrc
+  - x11/pointer/thinkpad-x61/20-trackpoint.conf
+  - x11/keyboard/10-keyboard.conf
+  - x11/.Xresources
+  - emacs/.emacs
