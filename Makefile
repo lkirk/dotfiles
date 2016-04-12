@@ -3,6 +3,10 @@ SHELL:=/usr/bin/zsh
 
 DOTFILES:=$(shell find $(WD)/src -type f)
 
+.PHONY:=install symlink-dotfiles sudo-symlink-dotfiles
+
+install: symlink-dotfiles sudo-symlink-dotfiles
+
 link-targets:=
 define gen-link-targets
 $(lastword $(subst :, ,$1)):
@@ -28,7 +32,6 @@ to-symlink+=$(WD)/src/emacs/.emacs:$(HOME)/.emacs
 to-sudo-symlink:=
 to-sudo-symlink+=$(WD)/src/x11/pointer/thinkpad-x61/20-trackpoint.conf:/etc/X11/xorg.conf.d/20-trackpoint.conf
 to-sudo-symlink+=$(WD)/src/x11/keyboard/10-keyboard.conf:/etc/X11/xorg.conf.d/10-keyboard.conf
-
 
 testing:
 	@$(foreach f,$(to-symlink),$(info $(call gen-link-targets,$(f))))
