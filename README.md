@@ -23,7 +23,7 @@ This repo contains a unified set of dotfiles
   - .zshrc
 
 
-* TODO Make Contidional [0/5]
+* TODO Make Contidional [0/6]
   - [ ] read operating system
   - [ ] read hostname as an alternative
   - [ ] shell script to modify file options
