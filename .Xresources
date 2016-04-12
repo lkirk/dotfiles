@@ -1,0 +1,89 @@
+!hidpi optimized
+!=========================
+!Xft.dpi: 125 
+Xft.dpi: 180 
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  none
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: none
+
+!urxvt settings
+!=========================
+URxvt*scrollBar: false
+!URxvt*font: -xos4-terminesspowerline-bold-r-normal--24-240-72-72-c-120-iso10646-1
+!URxvt*font: -*-terminus-medium-*-*-*-20-*-*-*-*-*-iso10646-*
+!URxvt*font: xft:Ubuntu Mono derivative Powerline:size=9:style=Regular
+URxvt.secondaryWheel: 1
+
+!xterm settings
+!=========================
+xterm*dynamicColors:  true
+xterm*metaSendsEscape:true
+xterm*locale:	      true
+!xterm*faceName:       Ubuntu Mono derivative Powerline:style=Regular
+xterm*faceName:       Ubuntu Mono:style=Regular
+xterm*faceSize:       9
+
+
+
+!*foreground: rgb:ee/ee/ee
+!*background: rgb:00/00/00
+
+*foreground: #ffffff
+*background: #000000
+
+!digerati theme xcolors.net
+!==========================
+! Black
+!*color0:   #000000
+!*color8:   #5F5F5F
+! Red
+!*color1:   #c03000
+!*color9:   #FF3A78
+! Green
+!*color2:   #b1d631
+!*color10:  #A6CD07
+! Yellow
+!*color3:   #fecf35
+!*color11:  #B5C865
+! Blue
+!*color4:   #426870
+!*color12:  #4A7781
+! Magenta
+!*color5:   #6D506D
+!*color13:  #FF3B77
+! Cyan
+!*color6:   #4bb5c1
+!*color14:  #4bb5c1
+! White
+!*color7:   #e2e2e5
+!*color15:  #e2e2e5
+
+!Black
+!*color0:           #4a4b4a
+!*color8:           #696969
+*color0:   #000000
+*color8:   #5F5F5F
+!Red
+*color1:           #D7699A
+*color9:           #F5A2B5
+!Green
+*color2:           #80D468
+*color10:          #A3F2A0
+!Yellow
+*color3:           #D7A169
+*color11:          #F5CDA2
+!Blue
+*color4:           #6985D7
+*color12:          #A2C1F5
+!Magenta
+*color5:           #C86AD4
+*color13:          #D2A2F5
+!Cyan
+*color6:           #6FCCD1
+*color14:          #A0E9F2
+!White
+*color7:           #DBDCDC
+*color15:          #FDFDFD
