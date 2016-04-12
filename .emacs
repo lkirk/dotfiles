@@ -15,6 +15,13 @@
   (kill-emacs)
   )
 
+;;---------;;
+; EVIL MODE ;
+;;---------;;
+;(add-to-list 'load-path "~/.emacs.d/evil-20160406.252")
+;(require 'evil)
+;(evil-mode 1)
+
 ;;------------------------;;
 ; MELPA PACKAGE MANAGEMENT ;
 ;;------------------------;;
