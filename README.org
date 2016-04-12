@@ -1,4 +1,4 @@
-#+TITLE: my
+#+TITLE: dotfiles!
 
 This repo contains a unified set of dotfiles it will install 
 itself with a simple set of symlinks. To perform this action:
