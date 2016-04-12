@@ -32,4 +32,3 @@ fi
 
 xsetroot -cursor_name left_ptr # removes x pointer
 exec xmonad > ~/.xmonad/xmonad.log 2>&1
-# exec mate-session

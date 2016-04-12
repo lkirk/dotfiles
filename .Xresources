@@ -1,28 +1,8 @@
-!hidpi optimized
-!=========================
-!Xft.dpi: 125 
-Xft.dpi: 180 
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  none
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: none
-
-!urxvt settings
-!=========================
-URxvt*scrollBar: false
-!URxvt*font: -xos4-terminesspowerline-bold-r-normal--24-240-72-72-c-120-iso10646-1
-!URxvt*font: -*-terminus-medium-*-*-*-20-*-*-*-*-*-iso10646-*
-!URxvt*font: xft:Ubuntu Mono derivative Powerline:size=9:style=Regular
-URxvt.secondaryWheel: 1
-
 !xterm settings
 !=========================
 xterm*dynamicColors:  true
 xterm*metaSendsEscape:true
 xterm*locale:	      true
-!xterm*faceName:       Ubuntu Mono derivative Powerline:style=Regular
 xterm*faceName:       Ubuntu Mono:style=Regular
 xterm*faceSize:       9
 
