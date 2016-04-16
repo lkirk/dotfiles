@@ -1,8 +1,6 @@
 WD:=$(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 SHELL:=/usr/bin/zsh
 
-DOTFILES:=$(shell find $(WD)/src -type f)
-
 .PHONY:=install symlink-dotfiles sudo-symlink-dotfiles
 
 install: symlink-dotfiles sudo-symlink-dotfiles
@@ -28,6 +26,7 @@ to-symlink+=$(WD)/src/xmonad/.xmobarrc:$(HOME)/.xmobarrc
 to-symlink+=$(WD)/src/x11/.xinitrc:$(HOME)/.xinitrc
 to-symlink+=$(WD)/src/x11/.Xresources:$(HOME)/.Xresources
 to-symlink+=$(WD)/src/emacs/.emacs:$(HOME)/.emacs
+to-symlink+=$(WD)/src/git/.gitconfig:$(HOME)/.gitconfig
 
 to-sudo-symlink:=
 to-sudo-symlink+=$(WD)/src/x11/pointer/thinkpad-x61/20-trackpoint.conf:/etc/X11/xorg.conf.d/20-trackpoint.conf
