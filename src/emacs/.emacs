@@ -1,11 +1,13 @@
-;;---------------;;
-; EMACS INIT FILE ;
-;;---------------;;
+;;
+;; emacs init file
+;;
+
 
 ;; setup melpa
 (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
 
 ;; define function to shutdown emacs server instance
 (defun ss()
@@ -14,6 +16,7 @@
   (save-some-buffers)
   (kill-emacs)
   )
+
 
 ;; set up some defaults
 (ido-mode t)
@@ -24,6 +27,7 @@
 (require 'evil)
 (evil-mode 1)
 
+
 ;; keyboard settings
 (defun select-next-window ()
   "Switch to the next window with M-`"
@@ -32,6 +36,7 @@
 
 (global-set-key (kbd "M-`") 'select-next-window)
 (global-set-key (kbd "C-x C-a") 'set-visited-file-name) ;;"save as" functionality
+
 
 ;; org defaults
 (require 'org)
@@ -42,90 +47,54 @@
 
 ;; custom modeline
 (setq-default mode-line-format
-   (list
-      " -- "
+   (list " -- " ;; Modified shows *
+     "{"
+     '(:eval (if (buffer-modified-p) "*"
+	       (if buffer-read-only "!" " ")))
+     "} "
 
-      ;; Modified shows *
-      "{"
-      '(:eval
-        (if (buffer-modified-p)
-         "*"
-         (if buffer-read-only
-                "!"
-                " "
-         )))
-      "} "
-  
-      ;; Buffer (tooltip - file name)
-      '(:eval (propertize "%b" 'face 'bold 'help-echo (buffer-file-name)))
-  
+     ;; Buffer (tooltip - file name)
+     '(:eval (propertize "%b" 'face 'bold 'help-echo (buffer-file-name)))
+     " " ;; Spaces 20 - "buffer"
+     '(:eval (make-string (- 20 (min 20 (length (buffer-name)))) ?-)) " "
 
-      " "
-  
-      ;; Spaces 20 - "buffer"
-      '(:eval
-        (make-string
-         (- 20
-           (min
-           20
-           (length (buffer-name))))
-        ?-))
-  
-    " "
-      ;; Current (row,column)
-    "("(propertize "%01l") "," (propertize "%01c") ") "
-  
-      ;; Spaces 7 - "(r,c)"
-      '(:eval
-        (make-string
-         (- 7
-           (min
-           4
-           (length (number-to-string (current-column)))
-           )
-           (min
-           3
-           (length (number-to-string (1+ (count-lines 1 (point)))))))
-        ?-))
-  
-      ;; Percentage of file traversed (current line/total lines)
-      " ["
-      '(:eval (number-to-string (/ (* (1+ (count-lines 1 (point))) 100) (count-lines 1 (point-max)))))
-      "%%] "
-  
-      ;; Spaces 4 - %
-      '(:eval
-        (make-string
-         (- 4 (length (number-to-string (/ (* (count-lines 1 (point)) 100) (count-lines 1 (point-max))))))
-        ?-))
-  
+     ;; Current (row,column)
+     "("(propertize "%01l") "," (propertize "%01c") ") "
+
+     ;; Spaces 7 - "(r,c)"
+     '(:eval
+       (make-string
+	(- 7 (min 4 (length (number-to-string (current-column))))
+	   (min 3 (length (number-to-string (1+ (count-lines 1 (point))))))) ?-))
+
+     ;; Percentage of file traversed (current line/total lines)
+     " ["
+     '(:eval
+       (number-to-string
+	(/ (* (1+ (count-lines 1 (point))) 100) (count-lines 1 (point-max)))))
+     "%%] "
+
+     ;; Spaces 4 - %
+     '(:eval
+       (make-string
+	(- 4 (length (number-to-string (/ (* (count-lines 1 (point)) 100)
+					  (count-lines 1 (point-max)))))) ?-))
+
       ;; Major Mode
       " [" '(:eval mode-name) "] "
-  
       ;; Spaces 18 - %
-      '(:eval
-        (make-string
-         (- 18
-           (min
-           18
-           (length mode-name)))
-        ?-))
-      
-      " ("
+      '(:eval (make-string (- 18 (min 18 (length mode-name))) ?-))
 
+      " ("
       ;; Time
       '(:eval (propertize (format-time-string "%H:%M")
                           'help-echo
                           (concat (format-time-string "%c; ")
                                   (emacs-uptime "Uptime:%hh"))))
-  
-      ;; Fill with '-'
       ")"
 
       ;; Spaces 13 - Battery info
-      (if (string= (user-full-name) "root") " --- [SUDO]")
-      " %-"
-      ))
+      (if (string= (user-full-name) "root") " --- [SUDO]") " %-"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
