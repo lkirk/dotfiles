@@ -1,6 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 import XMonad
 import XMonad.Layout
+import XMonad.Layout.GridVariants
 import XMonad.Layout.ResizableTile
 --import XMonad.Layout.Spiral
 import XMonad.Hooks.DynamicLog
@@ -15,30 +16,27 @@ import Graphics.X11.ExtraTypes.XF86( xF86XK_AudioRaiseVolume
 
 keyLayout = keys defaultConfig <+> \conf@(XConfig { .. })
    -> M.fromList
-      [ ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 4+")
+      [
+        ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+      , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 4+")
       , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 4-")
-      , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
-
       , ((shiftMask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2+")
       , ((shiftMask, xF86XK_AudioLowerVolume), spawn "amixer set Master 2-")
-      , ((modMask .|. shiftMask, xK_f), safeSpawnProg "chromium")
-      , ((modMask .|. shiftMask, xK_h), runInTerm "-title htop" "sh -c 'htop'")
 
-      , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 1 -time 0 -steps 5")
-      , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 1 -time 0 -steps 5")
-
-      , ((modMask, xK_F12), spawn scrotMouse)
       , ((modMask, xK_F11), spawn scrot)
+      , ((modMask, xK_F12), spawn scrotMouse)
 
-      , ((modMask .|. shiftMask, xK_z),
-              runInTerm "-title emacs" "bash -c 'export TERM=xterm-256color && emacsclient -tty'")
+      , ((modMask .|. shiftMask, xK_x), spawn "emacsclient -c")
+      , ((modMask .|. shiftMask, xK_f), safeSpawnProg "chromium")
       , ((modMask .|. shiftMask, xK_minus), sendMessage MirrorShrink)
-      , ((modMask .|. shiftMask, xK_equal), sendMessage MirrorExpand)]
+      , ((modMask .|. shiftMask, xK_equal), sendMessage MirrorExpand)
+      , ((modMask .|. shiftMask, xK_h), runInTerm "-title htop" "sh -c 'htop'")
+      , ((modMask .|. shiftMask, xK_z), runInTerm "-title emacs" runEmacsClient)
+      ]
 
-layout = ResizableTall 1 (3/100) (1/2) []
-         ||| Mirror tiled
+layout = ResizableTall nmaster (delta) (ratio) []
+         ||| Grid (16/10)
          ||| Full
---         ||| spiral (3/7)
     where
       -- default tiling algorithm partitions the screen into two panes
       tiled   = Tall nmaster delta ratio
@@ -46,8 +44,10 @@ layout = ResizableTall 1 (3/100) (1/2) []
       ratio   = 1/2   -- default proportion of screen occupied by master pane
       delta   = 3/100 -- percent of screen to increment by when resizing panes
 
+-- more complex commands
 scrot = "scrot -e 'mkdir -p ~/scrot && mv $f ~/scrot'"
 scrotMouse = "sleep 0.2; " ++ scrot ++ " -s"
+runEmacsClient = "bash -c 'export TERM=xterm-256color && emacsclient -tty'"
 
 main = xmonad =<< xmobar defaultConfig
        { terminal    = "xterm"
