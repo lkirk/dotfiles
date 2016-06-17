@@ -8,6 +8,7 @@ install: symlink-dotfiles sudo-symlink-dotfiles
 link-targets:=
 define gen-link-targets
 $(lastword $(subst :, ,$1)):
+	mkdir -p $$(basename $$(@))
 	ln -s $(firstword $(subst :, ,$1)) $$(@)
 link-targets+=$(lastword $(subst :, ,$1))
 endef
@@ -15,6 +16,7 @@ endef
 sudo-link-targets:=
 define sudo-gen-link-targets
 $(lastword $(subst :, ,$1)):
+	sudo mkdir -p $$(basename $(@))
 	sudo ln -s $(firstword $(subst :, ,$1)) $$(@)
 sudo-link-targets+=$(lastword $(subst :, ,$1))
 endef
