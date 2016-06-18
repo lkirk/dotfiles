@@ -35,7 +35,7 @@ keyLayout = keys defaultConfig <+> \conf@(XConfig { .. })
       ]
 
 layout = ResizableTall nmaster (delta) (ratio) []
-         ||| Grid (16/10)
+	 ||| Mirror tiled
          ||| Full
     where
       -- default tiling algorithm partitions the screen into two panes
