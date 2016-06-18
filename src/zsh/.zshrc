@@ -8,13 +8,12 @@ TERM=xterm-256color
 export KEYTIMEOUT=1
 
 bindkey -v
-
 alias left='xrandr --output VGA1 --auto --left-of LVDS1 --rotate left'
 alias right='xrandr --output VGA1 --auto --right-of LVDS1 --rotate left'
 alias normal='xrandr --output VGA1 --auto --left-of LVDS1 --rotate normal'
 alias off='xrandr --output VGA1 --off --output LVDS1 --auto'
 
-alias mntflash='sudo mount /dev/sdb1 /mnt/lkirk'
+alias mntflash='sudo mount -o gid=lkirk,fmask=112,dmask=002 /dev/sdb1 /mnt/lkirk'
 alias umntflash='sudo umount /mnt/lkirk'
 
 # add bin,cabal to path
