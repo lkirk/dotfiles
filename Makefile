@@ -23,6 +23,7 @@ sudo-link-targets+=$(lastword $(subst :, ,$1))
 endef
 
 to-symlink:=
+to-symlink+=$(WD)/src/zsh/.zshenv:$(HOME)/.zshenv
 to-symlink+=$(WD)/src/zsh/.zshrc:$(HOME)/.config/zsh/.zshrc
 to-symlink+=$(WD)/src/xmonad/xmonad.hs:$(HOME)/.xmonad/xmonad.hs
 to-symlink+=$(WD)/src/xmonad/.xmobarrc:$(HOME)/.xmobarrc
