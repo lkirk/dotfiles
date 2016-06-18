@@ -43,3 +43,8 @@ testing:
 
 symlink-dotfiles: $(foreach f,$(to-symlink),$(eval $(call gen-link-targets,$(f))))
 sudo-symlink-dotfiles: $(foreach f,$(to-sudo-symlink),$(eval $(call sudo-gen-link-targets,$(f))))
+
+DISK:=
+USER:=
+bootstrap-system:
+	$(MAKE) -f $(WD)/src/bootstrap-system.mk DISK=$(DISK) USER=$(USER)
