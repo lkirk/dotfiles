@@ -1,9 +1,10 @@
 WD:=$(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 SHELL:=/usr/bin/zsh
 
-.PHONY:=install symlink-dotfiles sudo-symlink-dotfiles
+#.PHONY:=install symlink-dotfiles sudo-symlink-dotfiles
 
-install: symlink-dotfiles sudo-symlink-dotfiles
+install:
+#	$(MAKE) -f <($(MAKE) -f $(abspath $(lastword $(MAKEFILE_LIST))) testing) $$($(MAKE) -f $(abspath $(lastword $(MAKEFILE_LIST))) testing | grep -v 'is up to date' | grep -v 'make' | grep : | sed -e's/://' | xargs)
 
 link-targets:=
 define gen-link-targets
