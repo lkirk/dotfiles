@@ -53,7 +53,7 @@ to-sudo-symlink+=$(WD)/src/x11/keyboard/10-keyboard.conf:/etc/X11/xorg.conf.d/10
 testing:
 	@$(foreach f,$(to-symlink),$(info $(call gen-link-targets,$(f))))
 	@$(foreach f,$(to-sudo-symlink),$(info $(call sudo-gen-link-targets,$(f))))
-	@$(foreach f,$(to-hardlink),$(info $(call hard-link-targets,$(f))))
+	@$(foreach f,$(to-hardlink),$(info $(call gen-hard-link-targets,$(f))))
 
 symlink-dotfiles: $(foreach f,$(to-symlink),$(eval $(call gen-link-targets,$(f))))
 hard-link-dotfiles: $(foreach f,$(to-hardlink),$(eval $(call gen-hard-link-targets,$(f))))
