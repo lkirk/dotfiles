@@ -9,7 +9,7 @@ install:
 link-targets:=
 define gen-link-targets
 $(lastword $(subst :, ,$1)):
-	mkdir -p $$(dirname $$(@))
+	mkdir -p $$(basename $$(@))
 	ln -s $(firstword $(subst :, ,$1)) $$(@)
 link-targets+=$(lastword $(subst :, ,$1))
 endef
@@ -17,7 +17,7 @@ endef
 hard-link-targets:=
 define gen-hard-link-targets
 $(lastword $(subst :, ,$1)):
-	mkdir -p $$(dirname $$(@))
+	mkdir -p $$(basename $$(@))
 	ln -P $(firstword $(subst :, ,$1)) $$(@)
 link-targets+=$(lastword $(subst :, ,$1))
 endef
@@ -25,7 +25,7 @@ endef
 sudo-link-targets:=
 define sudo-gen-link-targets
 $(lastword $(subst :, ,$1)):
-	sudo mkdir -p $$(dirname $(@))
+	sudo mkdir -p $$(basename $(@))
 	sudo ln -s $(firstword $(subst :, ,$1)) $$(@)
 sudo-link-targets+=$(lastword $(subst :, ,$1))
 endef
