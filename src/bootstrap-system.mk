@@ -117,8 +117,8 @@ make-user:
 	$(ARCH-CHROOT) mkdir /mnt/$(USER)
 	$(ARCH-CHROOT) chown '$(USER):$(USER)' /mnt/$(USER)
 	$(ARCH-CHROOT) systemctl enable NetworkManager
-	$(ARCH-CHROOT-AS-USER) systemctl --user enable ssh-agent.service
-	$(ARCH-CHROOT-AS-USER) systemctl --user enable emacs.service
+	$(ARCH-CHROOT-AS-USER) 'systemctl --user enable ssh-agent.service'
+	$(ARCH-CHROOT-AS-USER) 'systemctl --user enable emacs.service'
 	$(ARCH-CHROOT-AS-USER) 'ssh-keygen -f /home/lkirk/.ssh/$(HOSTNAME) -N ""'
 
 configure-emacs:
