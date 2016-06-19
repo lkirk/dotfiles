@@ -62,4 +62,4 @@ sudo-symlink-dotfiles: $(foreach f,$(to-sudo-symlink),$(eval $(call sudo-gen-lin
 DISK:=
 USER:=
 bootstrap-system:
-	$(MAKE) -f $(WD)/src/bootstrap-system.mk DISK=$(DISK) USER=$(USER)
+	$(MAKE) -f $(WD)/src/bootstrap-system.mk $(@) DISK=$(DISK) USER=$(USER)
