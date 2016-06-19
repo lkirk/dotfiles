@@ -1,0 +1,6 @@
+alias mntflash='sudo mount -o gid=lkirk,fmask=112,dmask=002 /dev/sdb1 /mnt/lkirk'
+alias umntflash='sudo umount /mnt/lkirk'
+
+alias monnormal='xrandr --output VGA1 --auto --left-of LVDS1 --output LVDS1 --auto'
+alias monleft='xrandr --output VGA1 --auto --left-of LVDS1 --rotate left --output LVDS1 --auto'
+alias monoff='xrandr --output VGA1 --off --output LVDS1 --auto'
