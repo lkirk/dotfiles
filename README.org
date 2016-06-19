@@ -1,17 +1,15 @@
-#+TITLE: dotfiles!
+#+TITLE: config, dotfiles, and boostrapping
 
-This repo contains a unified set of dotfiles it will install 
+this repo contains a unified set of dotfiles it will install 
 itself with a simple set of symlinks. To perform this action:
 #+begin_src sh
 make install
 #+end_src
 
-* Dotfiles contained:
-  - zsh/.zshrc
-  - xmonad/xmonad.hs
-  - xmonad/.xmobarrc
-  - x11/.xinitrc
-  - x11/pointer/thinkpad-x61/20-trackpoint.conf
-  - x11/keyboard/10-keyboard.conf
-  - x11/.Xresources
-  - emacs/.emacs
+there is also a complete system bootstrapping script to create
+an entire custom arch system, all the way from partitioning the
+drive to configuration settings. this repo ultimately gets
+pulled and installed into the new system. this can be invoked by:
+#+begin_src sh
+make bootstrap-system DISK=/dev/to/be/destroyed USER=username
+#+end_src
