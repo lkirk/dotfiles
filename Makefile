@@ -56,7 +56,7 @@ testing:
 	@$(foreach f,$(to-hardlink),$(info $(call hard-link-targets,$(f))))
 
 symlink-dotfiles: $(foreach f,$(to-symlink),$(eval $(call gen-link-targets,$(f))))
-hard-link-dotfiles: $(foreach f,$(to-hardlink),$(eval $(call hard-link-targets,$(f))))
+hard-link-dotfiles: $(foreach f,$(to-hardlink),$(eval $(call gen-hard-link-targets,$(f))))
 sudo-symlink-dotfiles: $(foreach f,$(to-sudo-symlink),$(eval $(call sudo-gen-link-targets,$(f))))
 
 DISK:=
