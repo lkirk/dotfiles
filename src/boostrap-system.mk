@@ -26,6 +26,12 @@ LVM_PARTITION:=$(DISK)2
 ARCH-CHROOT:=arch-chroot /mnt
 ARCH-CHROOT-AS-USER:=$(ARCH-CHROOT) su $(USER) -c
 
+DOTFILES-REPO:=https://www.github.com/lloydkirk/dotfiles
+GITHUB-USERNAME:=lloydkirk
+GITHUB-EMAIL:=kirklloyd@gmail.com
+
+HOSTNAME:=twix
+
 partition-physical-disk:
 	sgdisk -Z "$(DISK)" #zap disk
 	sgdisk -g "$(DISK)" #gpt setup
@@ -70,7 +76,7 @@ configure-system: ## can be run multiple times, can be used to refresh the fstab
 	[ -f /mnt/etc/localtime ] || ln -s /usr/share/zoneinfo/UTC /mnt/etc/localtime
 	sed -i -e's/^#\(en_US.UTF-8\)/\1/' /mnt/etc/locale.gen
 	echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
-	echo twix > /mnt/etc/hostname
+	echo $(HOSTNAME) > /mnt/etc/hostname
 	egrep '^HOOK.*encrypt lvm' /mnt/etc/mkinitcpio.conf \
 		|| sed -i -r -e's/(^HOOKS=.*)(filesystems)/\1encrypt lvm2 \2/' /mnt/etc/mkinitcpio.conf
 	$(ARCH-CHROOT) locale-gen
@@ -79,15 +85,14 @@ configure-system: ## can be run multiple times, can be used to refresh the fstab
 install-packages:
 	$(ARCH-CHROOT) pacman -S \
 		sudo syslinux gdisk cabal-install \
-		git mercurial curl wget\
-		ghc sbcl docker \
-		zsh grml-zsh-config htop \
-		xterm emacs vim \
+		git mercurial curl wget ghc sbcl docker \
+		zsh grml-zsh-config htop xterm emacs vim \
 		chromium \
-		networkmanager wpa_supplicant dialog \
+		networkmanager wpa_supplicant dialog openssh\
 		xorg-server xorg-server-utils xorg-xinit \
 		xf86-video-intel xf86-video-fbdev xf86-video-vesa \
-		ttf-ubuntu-font-family terminus-font alsa-utils
+		ttf-ubuntu-font-family terminus-font \
+		mplayer alsa-utils rtorrent
 
 make-user:
 	$(ARCH-CHROOT) useradd --create-home --shell /usr/bin/zsh $(USER)
@@ -96,22 +101,28 @@ make-user:
 	$(ARCH-CHROOT) groupadd sudo
 	$(ARCH-CHROOT) usermod -a -G sudo $(USER)
 	$(ARCH-CHROOT-AS-USER) 'mkdir -p /home/$(USER)/repo'
-	$(ARCH-CHROOT-AS-USER) 'git config --global user.name lloydkirk'
-	$(ARCH-CHROOT-AS-USER) 'git config --global user.email kirklloyd@gmail.com'
+	$(ARCH-CHROOT-AS-USER) 'git config --global user.name $(GITHUB-USERNAME)'
+	$(ARCH-CHROOT-AS-USER) 'git config --global user.email $(GITHUB-EMAIL)'
 	$(ARCH-CHROOT-AS-USER) 'cabal update'
 	$(ARCH-CHROOT-AS-USER) 'cabal install x11 xmonad xmonad-contrib xmobar'
 	$(ARCH-CHROOT-AS-USER) 'rm /home/$(USER)/.zshrc' # remove grml stock .zshrc
 	$(ARCH-CHROOT) pacman -Rns ca-certificates
 	$(ARCH-CHROOT) pacman -S ca-certificates
-	$(ARCH-CHROOT-AS-USER) 'git clone https://www.github.com/lloydkirk/dotfiles /home/$(USER)/repo/dotfiles'
+	$(ARCH-CHROOT-AS-USER) 'git clone $(DOTFILES-REPO) /home/$(USER)/repo/dotfiles'
 	$(ARCH-CHROOT-AS-USER) 'rm /home/$(USER)/.gitconfig'
 	echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /mnt/etc/sudoers
-	$(ARCH-CHROOT-AS-USER) 'make -f /home/lkirk/repo/dotfiles/Makefile install'
+	$(ARCH-CHROOT-AS-USER) 'make -f /home/$(USER)/repo/dotfiles/Makefile install'
 	sed -i -e'/^%sudo ALL=(ALL) NOPASSWD: ALL/d' /mnt/etc/sudoers
 	sed -i -e's/# \(%sudo ALL=$(ALL) ALL\)/\1/' /mnt/etc/sudoers
 	$(ARCH-CHROOT) mkdir /mnt/$(USER)
 	$(ARCH-CHROOT) chown '$(USER):$(USER)' /mnt/$(USER)
 	$(ARCH-CHROOT) systemctl enable NetworkManager
+	$(ARCH-CHROOT-AS-USER) systemctl --user enable ssh-agent.service
+	$(ARCH-CHROOT-AS-USER) systemctl --user enable emacs.service
+	$(ARCH-CHROOT-AS-USER) 'ssh-keygen -f /home/lkirk/.ssh/$(HOSTNAME) -N ""'
+
+configure-emacs:
+	$(ARCH-CHROOT-AS-USER) 'emacs -Q --script /home/$(USER)/repo/dotfiles/src/emacs/install-packages.el'
 
 install-yaourt:
 	echo '%sudo ALL=(ALL) NOPASSWD: ALL' >> /mnt/etc/sudoers
@@ -126,4 +137,4 @@ install-bootloader:
 	$(ARCH-CHROOT) syslinux-install_update -i -a -m
 	sed -i -e's/\(APPEND root\).\+/APPEND root=UUID=$(shell lsblk -f -r | awk '$$1=="brain-root"{print $$3}') cryptdevice=UUID=$(shell lsblk -f -r | awk '$$2=="crypto_LUKS"{print $$3}'):lvm rw/' /mnt/boot/syslinux/syslinux.cfg
 
-bootstrap-system: partition-physical-disk create-luks-container partition-luks-container format-virtual-partitions mount-virtual-partitions format-physical-boot-partition pacstrap-base-devel configure-system install-packages make-user install-yaourt install-bootloader
+bootstrap-system: partition-physical-disk create-luks-container partition-luks-container format-virtual-partitions mount-virtual-partitions format-physical-boot-partition pacstrap-base-devel configure-system install-packages make-user configure-emacs install-yaourt install-bootloader
