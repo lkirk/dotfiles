@@ -31,6 +31,7 @@ sudo-link-targets+=$(lastword $(subst :, ,$1))
 endef
 
 to-symlink:=
+to-symlink+=$(WD)/src/zsh/aliases:$(HOME)/.config/zsh/aliases
 to-symlink+=$(WD)/src/zsh/.zshenv:$(HOME)/.zshenv
 to-symlink+=$(WD)/src/zsh/.zlogin:$(HOME)/.config/zsh/.zlogin
 to-symlink+=$(WD)/src/zsh/.zshrc:$(HOME)/.config/zsh/.zshrc
