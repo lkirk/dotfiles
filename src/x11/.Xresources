@@ -3,52 +3,19 @@
 xterm*dynamicColors:  true
 xterm*metaSendsEscape:true
 xterm*locale:	      true
-xterm*faceName:       Ubuntu Mono:style=Regular
+! xterm*faceName:       Ubuntu Mono:style=Regular
+xterm*faceName:       Ubuntu Mono derivative Powerline:style=Regular
 xterm*faceSize:       9
 
-
-
-!*foreground: rgb:ee/ee/ee
-!*background: rgb:00/00/00
-
 *foreground: #ffffff
-*background: #000000
+*background: #282828
 
-!digerati theme xcolors.net
-!==========================
-! Black
-!*color0:   #000000
-!*color8:   #5F5F5F
-! Red
-!*color1:   #c03000
-!*color9:   #FF3A78
-! Green
-!*color2:   #b1d631
-!*color10:  #A6CD07
-! Yellow
-!*color3:   #fecf35
-!*color11:  #B5C865
-! Blue
-!*color4:   #426870
-!*color12:  #4A7781
-! Magenta
-!*color5:   #6D506D
-!*color13:  #FF3B77
-! Cyan
-!*color6:   #4bb5c1
-!*color14:  #4bb5c1
-! White
-!*color7:   #e2e2e5
-!*color15:  #e2e2e5
-
-!Black
-!*color0:           #4a4b4a
-!*color8:           #696969
-*color0:   #000000
-*color8:   #5F5F5F
+!Black?
+*color0:           #282828
+*color8:           #5F5F5F
 !Red
 *color1:           #D7699A
-*color9:           #F5A2B5
+*color9:           #ff0090
 !Green
 *color2:           #80D468
 *color10:          #A3F2A0
