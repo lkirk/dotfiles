@@ -1,0 +1,21 @@
+packages:
+- '.'
+extra-deps:
+- xmonad-0.13
+- xmonad-contrib-0.13
+- X11-1.8
+- X11-xft-0.3.1
+- data-default-0.7.1.1
+- extensible-exceptions-0.1.1.4
+- mtl-2.2.1
+- old-locale-1.0.0.7
+- old-time-1.1.0.3
+- random-1.1
+- setlocale-1.0.0.5
+- utf8-string-1.0.1.1
+- data-default-class-0.1.2.0
+- data-default-instances-containers-0.0.1
+- data-default-instances-dlist-0.0.1
+- data-default-instances-old-locale-0.0.1
+- dlist-0.8.0.3
+resolver: ghc-8.0.2
