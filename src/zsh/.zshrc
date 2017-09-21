@@ -10,12 +10,24 @@ export KEYTIMEOUT=1
 # vim keybindings
 bindkey -v
 
-# add bin,cabal to path
-[[ -d ${HOME}/bin ]] && export PATH="${HOME}/bin:${PATH}"
-[[ -d ${HOME}/.cabal/bin ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
+# export gopath
+export GOPATH=~/repo/godev
+
+# add bin, cabal, and roswell if the paths exist
+[[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:${PATH}"
+#[[ -d "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
+[[ -d "${HOME}/.local/bin" ]] && export PATH="${HOME}/.local/bin:${PATH}"
+[[ -d "${HOME}/.roswell/bin" ]] && export PATH="${HOME}/.roswell/bin:${PATH}"
+[[ -d "${HOME}/.gem/ruby/2.3.0/bin" ]] && export PATH="${HOME}/.gem/ruby/2.3.0/bin:${PATH}"
+[[ -d "${HOME}/repo/godev/bin" ]] && export PATH="${HOME}/repo/godev/bin:${PATH}"
 
 # aliases
 [[ -f ~/.config/zsh/aliases ]] && source ~/.config/zsh/aliases
+
+# tokens
+[[ -f ~/.config/zsh/keys ]] && source ~/.config/zsh/keys
+
+fpath+=$ZDOTDIR/completions
 
 # python pirtualenv in prompt
 function virtual_env_prompt () {
@@ -24,3 +36,4 @@ function virtual_env_prompt () {
 
 grml_theme_add_token virtual-env -f virtual_env_prompt
 zstyle ':prompt:grml:left:setup' items rc virtual-env change-root user at host path vcs percent
+systemctl --user import-environment PATH

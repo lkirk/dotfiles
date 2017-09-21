@@ -5,7 +5,7 @@ import XMonad.Layout.GridVariants
 import XMonad.Layout.ResizableTile
 --import XMonad.Layout.Spiral
 import XMonad.Hooks.DynamicLog
-import XMonad.Util.Run(safeSpawnProg, runInTerm)
+import XMonad.Util.Run(safeSpawn, safeSpawnProg, runInTerm)
 import qualified Data.Map as M
 import Graphics.X11.ExtraTypes.XF86( xF86XK_AudioRaiseVolume
                                    , xF86XK_AudioLowerVolume
@@ -26,8 +26,11 @@ keyLayout = keys defaultConfig <+> \conf@(XConfig { .. })
       , ((modMask, xK_F11), spawn scrot)
       , ((modMask, xK_F12), spawn scrotMouse)
 
-      , ((modMask .|. shiftMask, xK_x), spawn "emacsclient -c")
       , ((modMask .|. shiftMask, xK_f), safeSpawnProg "chromium")
+--      , ((modMask .|. shiftMask, xK_f), safeSpawnProg "firefox")
+--      , ((modMask, xK_f), safeSpawn "firefox" ["--private-window"])
+
+      , ((modMask .|. shiftMask, xK_x), spawn "emacsclient -c")
       , ((modMask .|. shiftMask, xK_minus), sendMessage MirrorShrink)
       , ((modMask .|. shiftMask, xK_equal), sendMessage MirrorExpand)
       , ((modMask .|. shiftMask, xK_h), runInTerm "-title htop" "sh -c 'htop'")

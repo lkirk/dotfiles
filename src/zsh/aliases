@@ -4,3 +4,14 @@ alias umntflash='sudo umount /mnt/lkirk'
 alias monnormal='xrandr --output VGA1 --auto --left-of LVDS1 --rotate normal --primary --output LVDS1 --auto'
 alias monleft='xrandr --output VGA1 --auto --left-of LVDS1 --rotate left --primary --output LVDS1 --auto'
 alias monoff='xrandr --output VGA1 --off --output LVDS1 --auto'
+
+alias d-ps='docker ps -a'
+alias d-img='docker images'
+alias d-rm='docker rm'
+alias d-st='docker stop'
+alias d-rn='docker run'
+alias d-p='docker pull'
+
+
+alias d-rmi='docker rmi $(docker images --filter=dangling=true -q)'
+alias d-rmv='docker rm $(docker ps --filter=status=exited -q)'
